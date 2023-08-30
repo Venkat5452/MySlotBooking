@@ -36,7 +36,7 @@
   },
   "scripts": {
     "start": "concurrently \"react-scripts start\" \"nodemon server\"",
-    "build": "react-scripts build",
+    "build": "concurrently \"react-scripts build\" \"nodemon server\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
