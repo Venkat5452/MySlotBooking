@@ -1,0 +1,8 @@
+.input-group-append {
+    cursor: pointer;
+  }
+.myDropDown
+{
+   height: 5px;
+   overflow: auto;
+}
