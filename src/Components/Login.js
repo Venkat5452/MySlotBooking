@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import './Login.css';
 import axios from "axios";
-
+import { BASE_URL } from "./helper";
 const Login=( )=> {
   localStorage.removeItem('token');
   localStorage.removeItem('token1');
@@ -28,7 +28,7 @@ const Login=( )=> {
       e.preventDefault();
       const {email,password}=user
       if(email && password ) {
-         axios.post("http://localhost:9002/login",user)
+         axios.post( BASE_URL + "/login",user)
          .then(res => {
           alert(res.data.message)
           localStorage.setItem('token',res.data.user.name);

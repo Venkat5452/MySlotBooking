@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import {useState} from 'react';
 import './DashBoard.css'
 import axios from 'axios';
+import { BASE_URL } from './helper';
 function DashBoard() {
 //   const availableTimeSlots = [
 //     "10:00 AM",
@@ -73,7 +74,7 @@ function DashBoard() {
       else {
         console.log(findday);
         console.log(sday);
-        axios.get("http://localhost:9002/getday/" + sday).then((res)=>{
+        axios.get( BASE_URL +"/getday/" + sday).then((res)=>{
          setfindday(res.data);
         });
          setdateflag(true);
@@ -89,7 +90,7 @@ function DashBoard() {
        usersslot.email=email;
        usersslot.day=sday;
        usersslot.slottime=sslottime;
-       axios.post("http://localhost:9002/makeslot",usersslot).then(res => {alert(res.data.message)});
+       axios.post(BASE_URL +"/makeslot",usersslot).then(res => {alert(res.data.message)});
        //axios.post("http://localhost:9002/makeday",sslot).then(res => {alert(res.data.message)});
        console.log(dateflag);
        setdateflag(false);
@@ -129,7 +130,7 @@ function DashBoard() {
     setmybookingflag(false);
   }
   function deleteslot() {
-    axios.delete("http://localhost:9002/deletemyslot/" + email);
+    axios.delete(BASE_URL +"/deletemyslot/" + email);
     setisdata(false);
     
   }
@@ -151,9 +152,9 @@ function DashBoard() {
         setpredate(`${year}-${month}-${day}`);
         setmaxdate(`${year + 1}-${month}-${day}`)
         //console.log(predate);
-        axios.get("http://localhost:9002/getmyslot/" + email).then(res =>(setmydata(res.data)));
+        axios.get(BASE_URL +"/getmyslot/" + email).then(res =>(setmydata(res.data)));
         if(sday!=="") {
-          axios.get("http://localhost:9002/getday/" + sday).then((res)=>{
+          axios.get(BASE_URL +"/getday/" + sday).then((res)=>{
             setfindday(res.data);
             setavailableTimeSlots(availableTimeSlots.filter(f=>!findday.includes(f)));
             console.log(availableTimeSlots);

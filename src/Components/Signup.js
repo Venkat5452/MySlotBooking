@@ -4,6 +4,7 @@ import { Form} from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "./helper";
 function Signup() {
   localStorage.removeItem('token');
   localStorage.removeItem('token1');
@@ -28,7 +29,7 @@ function Signup() {
         e.preventDefault();
           const {name,email,password,otp}=user
           if(name && email && password && password.length>=6 && otp.length===6) {
-             axios.post("http://localhost:9002/signup",user)
+             axios.post( BASE_URL + "/signup",user)
              .then(res => {
               if(res.data.message==="SuccessFully Registered") {
                 alert(res.data.message);
@@ -51,7 +52,7 @@ function Signup() {
         e.preventDefault(e);
         const {email,name,password}=user;
         if(name && email && password && password.length>=6) {
-            axios.post("http://localhost:9002/makemail",user).then(res=>{
+            axios.post(BASE_URL + "/makemail",user).then(res=>{
               alert(res.data);
               if(res.data==="OTP SENT Succesfully"){
                 setflag(false)
