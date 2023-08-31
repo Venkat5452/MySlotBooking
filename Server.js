@@ -11,7 +11,7 @@ server.use(express.json())
 server.use(express.urlencoded())
 server.use(cors())
 
-mongoose.connect("mongodb://10.45.27.236:27017/Myauth",{
+mongoose.connect(process.env.MYURL,{
     useNewUrlParser:true,
     useUnifiedTopology:true
 },()=> {
