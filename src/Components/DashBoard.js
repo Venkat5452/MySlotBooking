@@ -98,6 +98,7 @@ function DashBoard() {
        setsday("");
        setslottime("");
        setmybookingflag(false);
+       window.location.reload();
     }
     else {
       alert("Please select Valid Slot");
