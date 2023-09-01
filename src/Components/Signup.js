@@ -16,6 +16,7 @@ function Signup() {
         otp:""
     });
     const [flag,setflag]=useState(true);
+    const [flag1,setflag1]=useState(false);
     const handleSubmit = async (e) => {
       e.preventDefault()
         const {name,value}=e.target
@@ -52,10 +53,12 @@ function Signup() {
         e.preventDefault(e);
         const {email,name,password}=user;
         if(name && email && password && password.length>=6) {
+            setflag1(true);
             axios.post(BASE_URL + "/makemail",user).then(res=>{
               alert(res.data);
               if(res.data==="OTP SENT Succesfully"){
                 setflag(false)
+                setflag1(false);
               }
             });
         }
@@ -63,11 +66,16 @@ function Signup() {
             alert("Invalid Input");
         }
       }
+
+      function cancel(){
+        window.location.reload();
+      }
   return (
     <>
       <div className="pp">
        <div className="p-4 box"> { flag && <div>
           <h2 className="mb-3">You can Signup here..</h2>
+          {flag1 && <h5 className="text-success">Sending OTP...</h5>}
           <Form>
           <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Control
@@ -107,7 +115,8 @@ function Signup() {
             </div>
           </Form> </div>}
           {!flag && <div>
-            <h2 className="mb-3">Verify Your OTP</h2>
+            <h2 className="mb-3">Verify Your OTP Sent to</h2>
+            <h6>{user.email}</h6>
              <Form onSubmit={signup2}>
              <Form.Group className="mb-3" controlId="formBasicOTP">
               <Form.Control
@@ -125,6 +134,9 @@ function Signup() {
               </Button>
             </div>
              </Form>
+             <div className="p-3"><Button variant="primary" type="Submit" onClick={cancel}>
+                Cancel
+              </Button></div>
           </div>}
             <div className="p-3 box text-center mt-3">
               Move To Login page.. <Link to="/login">Login</Link>

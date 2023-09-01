@@ -104,6 +104,7 @@ function DashBoard() {
     }
   }
   function goback() {
+    window.location.reload();
      setdateflag(false);
      setsday("");
      setslottime("");
@@ -154,10 +155,12 @@ function DashBoard() {
         //console.log(predate);
         axios.get(BASE_URL +"/getmyslot/" + email).then(res =>(setmydata(res.data)));
         if(sday!=="") {
-          axios.get(BASE_URL +"/getday/" + sday).then((res)=>{
+            //console.log(sday);
+            axios.get(BASE_URL +"/getday/" + sday).then((res)=>{
             setfindday(res.data);
+            //console.log(res.data);
             setavailableTimeSlots(availableTimeSlots.filter(f=>!findday.includes(f)));
-            console.log(availableTimeSlots);
+            //console.log(availableTimeSlots);
           })
         }
         setname(localStorage.getItem('token'));
@@ -166,7 +169,7 @@ function DashBoard() {
       }
     }
       f();
-  });
+  },);
   const handlelogout=()=>{
     localStorage.removeItem('token');
     localStorage.removeItem('token1');
