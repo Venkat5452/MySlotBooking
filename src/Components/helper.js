@@ -1,1 +1,1 @@
-export const BASE_URL="https://mybackendslotbooking.onrender.com";
+export const BASE_URL="https://mybackendslotbooking1.onrender.com";
