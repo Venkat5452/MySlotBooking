@@ -10,6 +10,7 @@ const Login=( )=> {
   localStorage.removeItem('token');
   localStorage.removeItem('token1');
   const navigate=useNavigate();
+  const [d,sd]=useState("1");
   const [user,SetUser]=useState({
       password:"",
       email:""
@@ -28,9 +29,11 @@ const Login=( )=> {
       e.preventDefault();
       const {email,password}=user
       if(email && password ) {
+        sd("");
          axios.post( BASE_URL + "/login",user)
          .then(res => {
           alert(res.data.message)
+          sd(res.data.message);
           localStorage.setItem('token',res.data.user.name);
           localStorage.setItem('token1',res.data.user.email);
           navigate("/");
@@ -44,7 +47,8 @@ const Login=( )=> {
       <>
       <div className="pp">
         <div className="p-4 box">
-          <h2 className="mb-3">Please Login here</h2>
+          <h2 className="mb-2">Please Login here</h2>
+          {d==="" && (<h6 className="text-success">Verifying user....</h6>)}
           <Form onSubmit={login1}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Control
